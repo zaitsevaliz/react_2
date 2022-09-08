@@ -1,19 +1,20 @@
-import React from 'react';
+import React, { FC } from 'react';
 import './App.css';
 import { Form } from './components/Form';
 import { useState, useEffect } from 'react';
 import { MessageList } from './components/MessageList';
+import { AUTHOR, Message, Messages } from './types';
 
-export const App = () => {
-  const [messages, setMessages] = useState([])
-  const addMessage = (newMessage) => {
+export const App: FC = () => {
+  const [messages, setMessages] = useState<Messages>([])
+  const addMessage = (newMessage: Message) => {
     setMessages((prevMessages) => [...prevMessages, newMessage]);
   }
   useEffect(() => {
-    if (messages.length > 0 && messages[messages.length - 1].author === 'USER') {
+    if (messages.length > 0 && messages[messages.length - 1].author === AUTHOR.AUTHOR) {
       const timeout = setTimeout(() => {
         addMessage({
-          author: 'BOT',
+          author: AUTHOR.BOT,
           value: 'Im BOT',
         });
       }, 1500)
