@@ -2,3 +2,19 @@
     display: flex;
 
 }
+
+.header {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.ul-nav {
+    display: flex;
+    justify-content: space-around;
+}
+
+.delete-btn {
+    margin-left: 10px;
+    font-family: verdana;
+    letter-spacing: 2px;
+}
