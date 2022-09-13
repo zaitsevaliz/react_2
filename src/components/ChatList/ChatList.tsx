@@ -23,18 +23,13 @@ export const ChatList: FC<ChatListProps> = ({ chats, onAddChat, removeChat }) =>
             setValue('');
         }
     };
-    const deleteChat = (id: string, name: string) => {
-        removeChat(id);
-        name = '';
-    }
     return (
         <>
             <ul>
                 {chats.map((chat) =>
-                    <ListItem key={chat.id}>
-                        <NavLink to={`/chats/${chat.id}`} style={({ isActive }) => ({ color: isActive ? 'black' : 'blue' })}>{chat.name}</NavLink>
-                        <button id={chat.id} className="delete-btn" onClick={() => (deleteChat(chat.id, chat.name))}>X</button>
-                        {/* onClick={(() => console.log(chat.id))} */}
+                    <ListItem key={chat.name}>
+                        <NavLink to={`/chats/${chat.name}`} style={({ isActive }) => ({ color: isActive ? 'black' : 'blue' })}>{chat.name}</NavLink>
+                        <button id={chat.id} className="delete-btn" onClick={() => (removeChat(chat.name))}>X</button>
                     </ListItem>
                 )}
             </ul>

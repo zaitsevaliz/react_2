@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import '../../App.css';
 import { Link, NavLink, Outlet } from "react-router-dom";
 const navigate = [
     {

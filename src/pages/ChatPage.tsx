@@ -15,7 +15,11 @@ interface ChatPageProps {
 export const ChatPage: FC<ChatPageProps> = ({ chats, onAddChat, messages, onAddMessage, removeChat }) => {
     const { chatId } = useParams();
     useEffect(() => {
-        if (chatId && messages[chatId].length > 0 && messages[chatId][messages[chatId].length - 1].author === AUTHOR.AUTHOR) {
+        if (
+            chatId &&
+            //messages[chatId]?.length > 0 &&
+            messages[chatId].length > 0 &&
+            messages[chatId][messages[chatId].length - 1].author === AUTHOR.AUTHOR) {
             const timeout = setTimeout(() => {
                 onAddMessage(chatId, {
                     author: AUTHOR.BOT,
@@ -24,7 +28,6 @@ export const ChatPage: FC<ChatPageProps> = ({ chats, onAddChat, messages, onAddM
             }, 1500)
             return () => clearTimeout(timeout);
         }
-
     }, [chatId, messages, onAddMessage]);
     if (chatId && !messages[chatId]) {
         return <Navigate to="/chats" replace />
