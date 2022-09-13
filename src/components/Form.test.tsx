@@ -36,9 +36,5 @@ describe('Form', () => {
         const button = screen.getByTestId('button');
         fireEvent.click(button);
         expect(addMessage).toHaveBeenCalledTimes(1);
-
-        // const handleSubmit = jest.fn();
-        // fireEvent.submit(getByRole(TextField,'myForm'))
-        // expect(handleSubmit).toHaveBeenCalledTimes(1);
     })
 })

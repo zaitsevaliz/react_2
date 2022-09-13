@@ -4,12 +4,12 @@ import { Message, Messages } from '../types';
 import { Chat } from '../chats';
 
 interface MessageListProps {
-    messages: Messages;
+    messages: Message[];
 }
 export const MessageList: FC<MessageListProps> = ({ messages }) => {
     return (
         <div className="chats">
-            <Chat />
+            {/* <Chat /> */}
             <List >
                 {messages.map((message, idx) => (
                     <ListItem key={idx} data-testid="li" >{message.author}:{message.value}</ListItem>
