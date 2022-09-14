@@ -4,7 +4,9 @@ import { ChatList } from '../components/ChatList';
 import { Form } from '../components/Form';
 import { MessageList } from '../components/MessageList';
 import { AUTHOR, Chat, Message, Messages } from '../types';
-
+import style from './ChatPage.module.css';
+//@ts-ignore
+import { WithClasses } from '../HOC/WithClasses';
 interface ChatPageProps {
     chats: Chat[];
     onAddChat: (chat: Chat) => void;
@@ -14,11 +16,12 @@ interface ChatPageProps {
 }
 export const ChatPage: FC<ChatPageProps> = ({ chats, onAddChat, messages, onAddMessage, removeChat }) => {
     const { chatId } = useParams();
+    const MessageListWithClass = WithClasses(MessageList);
     useEffect(() => {
+        //messages[chatId]?.length > 0 &&
         if (
             chatId &&
-            //messages[chatId]?.length > 0 &&
-            messages[chatId].length > 0 &&
+            messages[chatId]?.length > 0 &&
             messages[chatId][messages[chatId].length - 1].author === AUTHOR.AUTHOR) {
             const timeout = setTimeout(() => {
                 onAddMessage(chatId, {
@@ -34,7 +37,7 @@ export const ChatPage: FC<ChatPageProps> = ({ chats, onAddChat, messages, onAddM
     }
     return <>
         <ChatList chats={chats} onAddChat={onAddChat} removeChat={removeChat} />
-        <MessageList messages={chatId ? messages[chatId] : []} />
+        <MessageListWithClass messages={chatId ? messages[chatId] : []} classes={style.border} />
         <Form addMessage={onAddMessage} />
     </>
 }

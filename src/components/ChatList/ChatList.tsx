@@ -1,10 +1,9 @@
 import { List, ListItem } from "@mui/material";
 import React, { FC, useState } from "react";
 import { Chat } from "../../types";
-import { customAlphabet } from 'nanoid';
+import { nanoid } from 'nanoid';
 import { Link, NavLink } from "react-router-dom";
 import '../../App.css';
-const nanoid = customAlphabet('1234567890', 10)
 interface ChatListProps {
     chats: Chat[];
     onAddChat: (chat: Chat) => void;

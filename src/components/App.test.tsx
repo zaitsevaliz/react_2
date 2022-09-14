@@ -6,32 +6,32 @@ import { AUTHOR } from '../types';
 import { App } from '../App';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
+import '@testing-library/jest-dom';
 
 describe('App', () => {
-    it('render component', () => {
-        render(<App />);
-    });
-    it('wrong url', () => {
-        render(<MemoryRouter initialEntries={['/wrong-url']}>
-            <App />
-        </MemoryRouter>);
-        expect(screen.getByText(/404 page/)).toBeInTheDocument();
-    })
+    // it('render main page', () => {
+    //     window.HTMLElement.prototype.scrollIntoView = jest.fn();
+    //     render(
+    //         <MemoryRouter initialEntries={['/main']}>
+    //             <App />
+    //         </MemoryRouter>
+    //     );
+    // });
     // it('send user message', async () => {
-    //     render(<App />);
+    //     window.HTMLElement.prototype.scrollIntoView = jest.fn();
+    //     render(
+    //         <MemoryRouter initialEntries={['/chats/1']}>
+    //             <App />
+    //         </MemoryRouter>
+    //     );
+
     //     const input = screen.getByTestId<HTMLInputElement>('input');
-    //     await userEvent.type(input, 'Hello');
+    //     await userEvent.type(input, 'Hello, world!');
+
     //     const button = screen.getByTestId('button');
     //     await userEvent.click(button);
-    //     expect(screen.getAllByTestId('li').length).toBe(1);
+
+    //     expect(screen.getAllByTestId('li').length).toBe(2);
     // });
-    // it('bot answer', async () => {
-    //     render(<App />);
-    //     const input = screen.getByTestId<HTMLInputElement>('input');
-    //     await userEvent.type(input, 'Hello');
-    //     const button = screen.getByTestId('button');
-    //     // await userEvent.click(button);
-    //     expect(await screen.findByText(/Im BOT/)).toBeInTheDocument();
-    //     await waitFor(() => expect(screen.getByText(/Im BOT/)).toBeInTheDocument());
-    // })
+
 });
