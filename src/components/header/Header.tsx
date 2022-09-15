@@ -13,9 +13,13 @@ const navigate = [
         name: 'Profile',
         path: '/profile',
     },
+    {
+        name: 'About',
+        path: '/about',
+    },
 ];
-export const Header: FC = () => {
-    return <>
+export const Header: FC = () =>
+    <>
         <header className="header">
             <ul className="ul-nav">
                 {navigate.map((item, idx) => (
@@ -28,5 +32,4 @@ export const Header: FC = () => {
         <main>
             <Outlet />
         </main>
-    </>;
-}
+    </>
