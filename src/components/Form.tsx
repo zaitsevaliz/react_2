@@ -27,7 +27,7 @@ export const Form: FC<FormProps> = ({ addMessage }) => {
     return (
         <>
             <form onSubmit={handleSubmit} className="form" role="myForm">
-                <TextField variant="outlined" placeholder='text' type="text" value={value} onChange={(e) => setValue(e.target.value)} inputRef={input => input && input.focus()} inputProps={{ 'data-testid': 'input' }} />
+                <TextField variant="outlined" placeholder='text' type="text" value={value} onChange={(e) => setValue(e.target.value)} autoFocus inputProps={{ 'data-testid': 'input' }} />
                 < MUIButton variant="outlined" disabled={!value} type="submit" data-testid='button' >Send</MUIButton>
             </form >
             <p>theme: {theme === 'light' ? 'light' : 'dark'}</p>
