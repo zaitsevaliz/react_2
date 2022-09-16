@@ -12,40 +12,11 @@ import { ThemeContext } from './utils/ThemeContext';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { About, AboutWithConnect } from './pages/About';
-// const defaultMessages: Messages = {
-//   first: [{ author: AUTHOR.AUTHOR, value: 'hello,world!' }],
-//   second: [{ author: AUTHOR.BOT, value: 'hello, im bot' }],
-// }
 export const App: FC = () => {
-  // const [messages, setMessages] = useState<Messages>(defaultMessages);
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light')
   }
-  // const chats = useMemo(() =>
-  //   Object.keys(messages).map((chatName) => ({
-  //     name: chatName,
-  //     id: nanoid(),
-  //   })),
-  //   [Object.keys(messages).length]
-  // );
-  // const onAddChat = (newChat: Chat) => {
-  //   setMessages({
-  //     ...messages,
-  //     [newChat.name]: [],
-  //   })
-  // }
-  // const onAddMessage = (chatId: string, newMessage: Message) => {
-  //   setMessages({
-  //     ...messages,
-  //     [chatId]: [...messages[chatId], newMessage],
-  //   });
-  // };
-  // const removeChat = (id: string) => {
-  //   const newMessages = { ...messages };
-  //   delete newMessages[id];
-  //   setMessages(newMessages);
-  // };
   return (
     <Provider store={store}>
       <ThemeContext.Provider value={{ theme, toggleTheme }}>
