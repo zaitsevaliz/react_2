@@ -1,8 +1,6 @@
 import React, { FC, useMemo } from 'react';
 import './App.css';
 import { useState, useEffect } from 'react';
-import { MessageList } from './components/MessageList';
-import { AUTHOR, Chat, Message, Messages } from './types';
 import { Routes, Route } from 'react-router-dom';
 import { Main } from './pages/Main';
 import { Profile } from './pages/Profile';
@@ -14,37 +12,40 @@ import { ThemeContext } from './utils/ThemeContext';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { About, AboutWithConnect } from './pages/About';
-const defaultMessages: Messages = {
-  first: [{ author: AUTHOR.AUTHOR, value: 'hello,world!' }],
-  second: [{ author: AUTHOR.BOT, value: 'hello, im bot' }],
-}
+// const defaultMessages: Messages = {
+//   first: [{ author: AUTHOR.AUTHOR, value: 'hello,world!' }],
+//   second: [{ author: AUTHOR.BOT, value: 'hello, im bot' }],
+// }
 export const App: FC = () => {
-  const [messages, setMessages] = useState<Messages>(defaultMessages);
+  // const [messages, setMessages] = useState<Messages>(defaultMessages);
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light')
   }
-  const chats = Object.keys(messages).map((chatName) => ({
-    name: chatName,
-    id: nanoid(),
-  }))
-  const onAddChat = (newChat: Chat) => {
-    setMessages({
-      ...messages,
-      [newChat.name]: [],
-    })
-  }
-  const onAddMessage = (chatId: string, newMessage: Message) => {
-    setMessages({
-      ...messages,
-      [chatId]: [...messages[chatId], newMessage],
-    });
-  };
-  const removeChat = (id: string) => {
-    const newMessages = { ...messages };
-    delete newMessages[id];
-    setMessages(newMessages);
-  };
+  // const chats = useMemo(() =>
+  //   Object.keys(messages).map((chatName) => ({
+  //     name: chatName,
+  //     id: nanoid(),
+  //   })),
+  //   [Object.keys(messages).length]
+  // );
+  // const onAddChat = (newChat: Chat) => {
+  //   setMessages({
+  //     ...messages,
+  //     [newChat.name]: [],
+  //   })
+  // }
+  // const onAddMessage = (chatId: string, newMessage: Message) => {
+  //   setMessages({
+  //     ...messages,
+  //     [chatId]: [...messages[chatId], newMessage],
+  //   });
+  // };
+  // const removeChat = (id: string) => {
+  //   const newMessages = { ...messages };
+  //   delete newMessages[id];
+  //   setMessages(newMessages);
+  // };
   return (
     <Provider store={store}>
       <ThemeContext.Provider value={{ theme, toggleTheme }}>
@@ -54,10 +55,9 @@ export const App: FC = () => {
             <Route path="profile" element={<Profile />} />
             <Route path="about" element={<AboutWithConnect />} />
             <Route path="chats" >
-              <Route index element={<ChatList chats={chats} onAddChat={onAddChat} removeChat={removeChat} />} />
+              <Route index element={<ChatList />} />
               <Route path=":chatId" element={
-                <ChatPage chats={chats} onAddChat={onAddChat} messages={messages}
-                  onAddMessage={onAddMessage} removeChat={removeChat} />} />
+                <ChatPage />} />
             </Route>
           </Route>
           <Route path="*" element={<div>404 page</div>} />

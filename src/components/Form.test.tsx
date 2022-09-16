@@ -3,13 +3,11 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-
-
 describe('Form', () => {
     let addMessage: jest.Mock<any, any>;
     beforeEach(() => {
         addMessage = jest.fn();
-        render(<Form addMessage={addMessage} />)
+        render(<Form />)
     })
 
     it('initial value of the form', () => {
