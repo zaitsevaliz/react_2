@@ -2,22 +2,33 @@ import { Form } from './Form';
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { Provider } from 'react-redux';
+import { store } from '../store';
 
 describe('Form', () => {
-    let addMessage: jest.Mock<any, any>;
     beforeEach(() => {
-        addMessage = jest.fn();
-        render(<Form />)
-    })
-
-    it('initial value of the form', () => {
-        const input = screen.getByRole<HTMLInputElement>('textbox')
-        expect(input.value).toEqual('')
+        render(
+            <Provider store={store}>
+                <Form />
+            </Provider>
+        );
     });
     it('input change with fireevent', () => {
-        const input = screen.getByTestId<HTMLInputElement>('input');
-        fireEvent.change(input, { target: { value: 'new value' } });
-        expect(input.value).toBe('new value');
-    })
+        const inputEl = screen.getByTestId<HTMLInputElement>('input');
+
+        fireEvent.change(inputEl, { target: { value: 'new value' } });
+        expect(inputEl.value).toBe('new value');
+        screen.debug();
+    });
+
+
+    it('activation of the button when the text is entered', () => {
+        const value = '23';
+        const inputEl = screen.getByTestId<HTMLInputElement>('input');
+        const inputBtn = screen.getByTestId('button');
+        fireEvent.change(inputEl, { target: { value: value } });
+
+        expect(inputBtn).toBeEnabled();
+    });
 
 })

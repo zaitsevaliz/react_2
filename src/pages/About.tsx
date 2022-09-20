@@ -1,9 +1,9 @@
 import React, { FC, useState } from "react";
-import { store } from "../store";
+import { store, StoreState } from "../store";
 import { connect } from "react-redux";
 import { Dispatch } from 'redux';
-import { changeName, toggleProfile } from "../store/profile/actions";
-import { ProfileState } from "../store/profile/reducer";
+import { changeName, toggleProfile } from "../store/profile/slice";
+import { Profile } from "./Profile";
 export const About: FC = ({ visible, toggle }: any) => {
     return (
         <>
@@ -14,9 +14,11 @@ export const About: FC = ({ visible, toggle }: any) => {
         </>
     );
 };
-const mapStateToProps = (state: ProfileState) => ({
-    visible: state.visible
+const mapStateToProps = (state: StoreState) => ({
+    visible: state.profile.visible
 })
+
+
 const mapDispatchToProps = (dispatch: Dispatch) => ({
     toggle: () => dispatch(toggleProfile()),
 })
