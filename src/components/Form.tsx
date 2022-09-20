@@ -3,27 +3,28 @@ import { useState } from "react";
 import { useParams } from 'react-router-dom';
 import MUIButton from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { AUTHOR, Message } from '../types';
+import { AUTHOR } from '../types';
 import { ThemeContext } from '../utils/ThemeContext';
 import { useDispatch } from 'react-redux';
-import { addMessage } from '../store/messages/actions';
+import { addMessageWithReply } from '../store/messages/slice';
 import { Wrapper } from './styled';
-interface FormProps {
-    addMessage: (chatId: string, msg: Message) => void;
-}
+import { ThunkDispatch } from 'redux-thunk';
+import { StoreState } from '../store';
+
 
 export const Form: FC = () => {
     const [value, setValue] = useState('');
     const { chatId } = useParams();
     const { theme, toggleTheme } = useContext(ThemeContext);
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<ThunkDispatch<StoreState, void, any>>();
+
     const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
         ev.preventDefault();
         if (chatId) {
             dispatch(
-                addMessage(chatId, {
-                    author: AUTHOR.AUTHOR,
-                    value,
+                addMessageWithReply({
+                    chatName: chatId,
+                    message: { author: AUTHOR.AUTHOR, value },
                 })
             );
         }
