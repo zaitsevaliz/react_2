@@ -30,7 +30,6 @@ export const Form: FC = () => {
         }
         setValue('');
     };
-
     return (
         <Wrapper>
             <form onSubmit={handleSubmit} className="form" role="myForm">
